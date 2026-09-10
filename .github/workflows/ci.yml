@@ -4,6 +4,7 @@ on:
     branches:
       - develop
       - release-*
+      - master
 
 jobs:
   devops:
@@ -45,11 +46,11 @@ jobs:
           echo "ORGANIZATION=miw-upm-github" >> $GITHUB_ENV
           echo "ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
 
-      - name: 📊 Sonar Analysis
-        run: >
-          mvn -B sonar:sonar
-          -Dsonar.projectKey=miw-upm-github_${{ env.ARTIFACT }}
-          -Dsonar.organization=miw-upm-github
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+#      - name: 📊 Sonar Analysis
+#        run: >
+#          mvn -B sonar:sonar
+#          -Dsonar.projectKey=miw-upm-github_${{ env.ARTIFACT }}
+#          -Dsonar.organization=miw-upm-github
+#          -Dsonar.host.url=https://sonarcloud.io
+#          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
