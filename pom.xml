@@ -54,6 +54,9 @@
         <jacoco.version>0.8.15</jacoco.version>
         <!-- Official Plugin Sonar -->
         <sonar-maven-plugin-version>5.7.0.6970</sonar-maven-plugin-version>
+        <sonar.projectKey>agustinyagueupm_iwvg-devops-2026-yague-agustin</sonar.projectKey>
+        <sonar.organization>agustinyagueupm</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <!-- OpenAPI -->
         <springdoc-openapi-starter-webmvc-ui.version>3.0.3</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
@@ -63,6 +66,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+            <optional>true</optional>
             <scope>provided</scope>
         </dependency>
         <!-- Web -->

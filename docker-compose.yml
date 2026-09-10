@@ -7,11 +7,11 @@ services:
     environment:
       JAVA_OPTS: "-Xms64m -Xmx384m"
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/iwvgdevopsdb
-    networks: [ devops ]
+    networks: [ devopsNet ]
     extra_hosts: [ "host.docker.internal:host-gateway" ]
 
 networks:
-  devops:
+  devopsNet:
     external: true
 
 #> docker compose up --build -d
