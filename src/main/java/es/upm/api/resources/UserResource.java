@@ -1,0 +1,47 @@
+package es.upm.api.resources;
+
+import es.upm.api.resources.dtos.UserDto;
+import es.upm.api.services.UserService;
+import es.upm.api.services.criteria.UserFindCriteria;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequiredArgsConstructor
+@Log4j2
+public class UserResource {
+    public static final String USERS = "/users";
+    public static final String USER_ID = USERS + "/{id}";
+    private final UserService userService;
+
+    @PostMapping(USERS)
+    public void create(@Valid @RequestBody UserDto userDto) {
+        userDto.doDefault();
+        this.userService.create(userDto.toDomain());
+    }
+
+    @GetMapping(USER_ID)
+    public UserDto read(@PathVariable UUID id) {
+        return new UserDto(this.userService.read(id));
+    }
+
+    @GetMapping(USERS)
+    public List<UserDto> find(@ModelAttribute UserFindCriteria criteria) {
+        return this.userService.find(criteria)
+                .map(UserDto::new)
+                .map(UserDto::toSummary)
+                .toList();
+    }
+
+    @DeleteMapping(USER_ID)
+    public void delete(@PathVariable UUID id) {
+        this.userService.delete(id);
+    }
+
+}
+
