@@ -80,14 +80,14 @@ jobs:
       # Organización de la cuenta de Sonar: miw-upm-github
       - name: 🏷️ Prepare container image metadata, Sonar Organization & artifact from pom
         run: |
-          echo "ORGANIZATION=miw-upm-github" >> $GITHUB_ENV
+          echo "ORGANIZATION=agustinyagueupm" >> $GITHUB_ENV
           echo "ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: 📊 Sonar Analysis
         run: >
           mvn -B sonar:sonar
           -Dsonar.projectKey=agustinyagueupm_${{ env.ARTIFACT }}
-          -Dsonar.organization=agustinyagueupm
+          -Dsonar.organization={{ env.ORGANIZATION }}
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
