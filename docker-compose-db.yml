@@ -13,14 +13,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - devops
+      - devopsNet
 
 volumes:
   postgres_data:
     name: "postgres-data"
 
 networks:
-  devops:
+  devopsNet:
     external: true
 
 # Construir todas las BD
