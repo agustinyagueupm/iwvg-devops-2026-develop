@@ -87,7 +87,7 @@ jobs:
         run: >
           mvn -B sonar:sonar
           -Dsonar.projectKey=agustinyagueupm_${{ env.ARTIFACT }}
-          -Dsonar.organization={{ env.ORGANIZATION }}
+          -Dsonar.organization=${{ env.ORGANIZATION }}
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
