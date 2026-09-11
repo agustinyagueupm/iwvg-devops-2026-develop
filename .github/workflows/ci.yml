@@ -27,14 +27,6 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: maven
-#      - name: 🔔 Notify Slack on failure
-#        if: failure()
-#        uses: 8398a7/action-slack@v3
-#        with:
-#          status: ${{ job.status }}
-#          fields: repo,author,commit,author,workflow,
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       # -------------------------------------------------------------
       # PASO: Notificación de Éxito en Slack
@@ -64,7 +56,6 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-
       - name: 🛡️ Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
@@ -86,7 +77,7 @@ jobs:
       - name: 📊 Sonar Analysis
         run: >
           mvn -B sonar:sonar
-          -Dsonar.projectKey=agustinyagueupm_${{ env.ARTIFACT }}
+          -Dsonar.projectKey=${{ env.ORGANIZATION }}_${{ env.ARTIFACT }}
           -Dsonar.organization=${{ env.ORGANIZATION }}
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
