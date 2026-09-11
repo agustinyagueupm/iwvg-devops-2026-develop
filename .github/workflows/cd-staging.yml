@@ -90,6 +90,6 @@ jobs:
 #              exit 1
 #            fi
 #
-#            echo "✅ Deploy exitoso"
-#            docker image prune --filter "until=12h" -f
+# echo "✅ Deploy exitoso"
+# docker image prune --filter "until=12h" -f
       
