@@ -4,6 +4,7 @@ on:
     branches:
       - develop
       - release-*
+      - master
 
 jobs:
   devops:
@@ -27,6 +28,34 @@ jobs:
           java-version: 21
           cache: maven
 
+      # -------------------------------------------------------------
+      # PASO: Notificación de Éxito en Slack
+      # -------------------------------------------------------------
+      - name: Notificar éxito a Slack
+        if: success() # Solo se dispara si la compilación y tests fueron exitosos
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {
+              "text": "✅ *¡Integración Continua Exitosa!*\n*Repositorio:* ${{ github.repository }}\n*Rama:* ${{ github.ref_name }}\n*Autor:* ${{ github.actor }}\n*Commit:* ${{ github.sha }}\n*Estado:* La API Spring Boot ha sido compilada y validada correctamente con las pruebas de Maven."
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # -------------------------------------------------------------
+      # PASO: Notificación de Fallo en Slack
+      # -------------------------------------------------------------
+      - name: Notificar fallo a Slack
+        if: failure() # Solo se dispara si falló algún paso anterior
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {
+              "text": "🚨 *¡Fallo en la Integración Continua!*\n*Repositorio:* ${{ github.repository }}\n*Rama:* ${{ github.ref_name }}\n*Autor:* ${{ github.actor }}\n*Commit:* ${{ github.sha }}\n*Estado:* La compilación o las pruebas han fallado. Revisen los logs en GitHub Actions."
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: 🛡️ Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
@@ -42,14 +71,14 @@ jobs:
       # Organización de la cuenta de Sonar: miw-upm-github
       - name: 🏷️ Prepare container image metadata, Sonar Organization & artifact from pom
         run: |
-          echo "ORGANIZATION=miw-upm-github" >> $GITHUB_ENV
+          echo "ORGANIZATION=agustinyagueupm" >> $GITHUB_ENV
           echo "ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: 📊 Sonar Analysis
         run: >
           mvn -B sonar:sonar
-          -Dsonar.projectKey=miw-upm-github_${{ env.ARTIFACT }}
-          -Dsonar.organization=miw-upm-github
+          -Dsonar.projectKey=${{ env.ORGANIZATION }}_${{ env.ARTIFACT }}
+          -Dsonar.organization=${{ env.ORGANIZATION }}
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
