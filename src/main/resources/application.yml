@@ -9,7 +9,7 @@ info:
 
 spring:
   application:
-    name: iwvg-devops
+    name: iwvg-devops-2026-yague-agustin
   profiles:
     default: dev
   output:
