@@ -5,8 +5,8 @@
 > Este proyecto es un apoyo docente de la asignatura. 
 
 ### Estado del código
-[![CI iwvg-devops](https://github.com/miw-upm/iwvg-devops-2026/actions/workflows/ci.yml/badge.svg)](https://github.com/miw-upm/iwvg-devops-2026/actions/workflows/ci.yml)
-[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=miw-upm-github_iwvg-devops-2026&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=miw-upm-github_iwvg-devops-2026)
+[![CI iwvg-devops](https://github.com/agustinyagueupm/iwvg-devops-2026-develop/actions/workflows/ci.yml/badge.svg)](https://github.com/agustinyagueupm/iwvg-devops-2026-develop/actions/workflows/ci.yml)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=agustinyagueupm_iwvg-devops-2026-yague-agustin&metric=alert_status&token=06829edeef6661573646ed110dd8d91034bf5674)](https://sonarcloud.io/summary/new_code?id=agustinyagueupm_iwvg-devops-2026-yague-agustin)
 [![AWS](http://54.194.26.150:8080/system/version-badge)](http://54.194.26.150:8080/system) 
 
 ### Tecnologías necesarias
