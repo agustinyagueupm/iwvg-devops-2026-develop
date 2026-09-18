@@ -11,6 +11,7 @@ spring:
     hibernate:
       ddl-auto: update
   # Valores creados en Render → Databases → Database → Connect
+  # actualizado
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${SPRING_DATASOURCE_URL}
