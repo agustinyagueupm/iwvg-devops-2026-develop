@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Log4j2
 @Component
-@Profile({"dev", "test"})
+@Profile({"dev", "pre", "prod", "test"})
 @Order(1)
 @RequiredArgsConstructor
 public class SeederForDev implements ApplicationRunner {
